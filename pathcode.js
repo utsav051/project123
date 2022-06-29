@@ -105,11 +105,6 @@ function Node(i, j) {
     this.y = this.j * resolution;
     this.r = resolution - 1;
 
-    // needed for A* and Greedy
-    // this.f = 0;
-    // this.g = 0;
-    // this.h = 0;
-
     // needed for Dijkstra
     this.d = Infinity
 
@@ -165,10 +160,6 @@ function Node(i, j) {
             this.obstacle = true;
             this.show(color(128, 128, 128));
         }
-        // else{
-        //     this.obstacle = false;
-        //     this.show(color(255,255,255));
-        // }
 
     }
 }
@@ -210,10 +201,6 @@ function dijkstraInitialize(){
         })
     })
 }
-
-// function initialize() {
-//     openSet.push(source);
-// }
 
 function BFSorDFS_initialize() {
     openSet.push(source);
@@ -259,83 +246,6 @@ function draw() {
             }
 
         }
-
-        // Algorithm for A* Search
-        // if (algo == "A* Search") {
-        //     if (openSet.length > 0) {
-        //         current = lowestFscoreNode();
-        //         if (current == destination) {
-        //             noLoop();
-        //             console.log("We're Done!")
-        //         }
-
-                //removing the "current" vertex from openSet and adding it to closedSet
-                // var removeIndex = openSet.map(function (item) { return item; }).indexOf(current);
-                // openSet.splice(removeIndex, 1);
-                // closedSet.push(current);
-
-                // for (neighbor of current.neighbors) {
-                //     // Checking to see if the node is valid
-                //     if (!closedSet.includes(neighbor) && !neighbor.obstacle) {
-                //         gScore = current.g + heuristic(neighbor, current);
-                //         let isGbetter = false;
-                //         if (openSet.includes(neighbor)) {
-                    //         if (gScore < neighbor.g) {
-                    //             neighbor.g = gScore;
-                    //             isGbetter = true;
-                    //         }
-                    //     }
-                    //     else {
-                    //         neighbor.g = gScore;
-                    //         isGbetter = true;
-                    //         openSet.push(neighbor);
-                    //     }
-                    //     if (isGbetter) {
-                    //         neighbor.h = heuristic(neighbor, destination);
-                    //         neighbor.f = neighbor.g + neighbor.h;
-                    //         neighbor.parent = current;
-                    //     }
-                    // }
-        //         }
-
-        //     }
-        //     else {
-        //         console.log('no solution');
-        //         noLoop();
-        //         return;
-        //     }
-        // }
-
-        // Algorithm for Greedy Best First Search Search
-        // if (algo == "Greedy Best First Search") {
-        //     if (openSet.length > 0) {
-        //         current = lowestHeuristicNode();
-        //         if (current == destination) {
-        //             noLoop();
-        //             console.log("We're Done!")
-        //         }
-
-        //         //removing the "current" vertex from openSet and adding it to closedSet
-        //         var removeIndex = openSet.map(function (item) { return item; }).indexOf(current);
-        //         openSet.splice(removeIndex, 1);
-        //         closedSet.push(current);
-
-        //         for (neighbor of current.neighbors) {
-        //             // Checking to see if the node is valid
-        //             if (!closedSet.includes(neighbor) && !openSet.includes(neighbor) && !neighbor.obstacle) {
-        //                 neighbor.h = heuristic(neighbor, destination);
-        //                 neighbor.parent = current;
-        //                 openSet.push(neighbor)
-        //             }
-        //         }
-
-        //     }
-        //     else {
-        //         console.log('no solution');
-        //         noLoop();
-        //         return;
-        //     }
-        // }
 
         // Algorithm for Breadth First Search
         if (algo == "Breadth First Search") {
@@ -449,9 +359,6 @@ function dropdown(event) {
     let startButton = document.getElementById('startButton')
     startButton.innerHTML = `Start ${algo}`
     let message = document.getElementById('message')
-    // if(algo === "A* Search"){
-    //     message.innerHTML = `Insight: A* Search <span style = "font-weight: bold;">Gurantees</span> Shortest Path`
-    // }
     if(algo === "Dijkstra"){
         message.innerHTML = `Insight: Dijkstra's Algorithm Or A Variant Of It Is Known As UCS <span style = "font-weight: bold;">Gurantees</span> Shortest Path`
     }
@@ -461,9 +368,6 @@ function dropdown(event) {
     else if(algo === "Depth First Search"){
         message.innerHTML = `Insight: Depth First Search (DFS) <span style = "font-weight: bold;">Does Not Gurantee</span> Shortest Path Though Is A Feasible Choice For Memory <span style = "font-weight: bold;">If The Destination Is Far Away From The Source</span>`
     }
-    // else{
-    //     message.innerHTML = `Insight: Greedy Best-First Search <span style = "font-weight: bold;">Does Not Gurantee</span> Shortest Path As It Takes Decision Solely Based On <span style = "font-weight: bold;">Heuristics</span>`
-    // }
 }
 
 function start() {
@@ -475,9 +379,6 @@ function start() {
    else if(algo === "Dijkstra"){
         dijkstraInitialize()
     }
-    // else if (algo != "Breadth First Search" && algo != "Depth First Search") {
-    //     initialize()
-    // }
     else {
         BFSorDFS_initialize()
     }
@@ -622,11 +523,6 @@ function mouseReleased() {
 }
 
 function heuristic(node, goal) {
-    //euclidean distance
-    // dx = abs(node.x - goal.x);
-    // dy = abs(node.y - goal.y);
-    // return 1 * sqrt(dx * dx + dy * dy);
-
     //Manhattan distance
     dx = abs(node.x - goal.x);
     dy = abs(node.y - goal.y);
